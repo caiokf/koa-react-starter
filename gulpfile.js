@@ -25,7 +25,8 @@ const paths = {
   ],
 
   specSourceFiles: [
-    './server/**/*.spec.js'
+    './server/**/*.spec.js',
+    './client/**/*.spec.js',
   ]
 
 };
