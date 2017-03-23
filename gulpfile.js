@@ -98,4 +98,6 @@ gulp.task('eslint', () => {
 
 gulp.task('serve', ['watch:client', 'watch:server']);
 
+gulp.task('commit', ['eslint', 'specs']);
+
 gulp.task('default', ['serve']);
