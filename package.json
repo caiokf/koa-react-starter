@@ -4,7 +4,7 @@
   "description": "A great way to start your app with koa and react!",
   "main": "server.js",
   "scripts": {
-    "start": "gulp set",
+    "start": "gulp build",
     "webserver": "node server.js",
     "test": "mocha ./server/tests/ && ./node_modules/.bin/eslint .",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./server/tests/"
@@ -32,6 +32,7 @@
     "babel-preset-es2017": "^6.22.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-3": "^6.22.0",
+    "css-modulesify": "^0.27.1",
     "koa": "^2.2.0",
     "koa-bodyparser": "^2.2.0",
     "koa-generic-session": "^1.11.3",
@@ -54,6 +55,8 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-notify": "^3.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.1.0"
+    "mocha": "^3.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
