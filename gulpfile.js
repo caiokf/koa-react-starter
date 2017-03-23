@@ -8,10 +8,7 @@ const cssmodulesify = require('css-modulesify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const livereload = require('gulp-livereload');
-const Cache = require('gulp-file-cache');
 const fs = require('fs');
-
-var cache = new Cache();
 
 const paths = {
   clientEntrypoint: './client/app.js',
@@ -40,6 +37,15 @@ gulp.task('compile:server', () => {
     .pipe(gulp.dest(paths.serverBuildDir))
 });
 
+gulp.task('watch:server', ['compile:server'] , () => {
+  nodemon({
+    script: './dist/server.js',
+    ext: 'js',
+    watch: paths.serverSourceFiles,
+    tasks: ['compile']
+  });
+});
+
 gulp.task('compile:client', () => {
   browserify(paths.clientEntrypoint)
     .transform('babelify', { presets: ['es2015', 'react'], "plugins": ["transform-async-to-generator"] })
@@ -63,11 +69,6 @@ gulp.task('watch:client', ['compile:client'] , () => {
   gulp.watch(paths.clientSourceFiles , ['compile:client']);
 });
 
-gulp.task('build', ['watch:client','compile:server'], () => {
-  return nodemon({
-    script: './dist/server.js',
-    ext: 'js',
-    watch: paths.serverSourceFiles,
-    tasks: ['compile']
-  });
-});
+gulp.task('serve', ['watch:client', 'watch:server']);
+
+gulp.task('default', ['serve']);

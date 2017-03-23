@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "A great way to start your app with koa and react!",
   "main": "server.js",
+  "keywords": [ "koa", "react", "starter" ],
+  "author": "Caio Kinzrel Filho (caiokf@gmail.com)",
+  "license": "ISC",
+  "homepage": "https://github.com/caiokf/koa-react-starter#readme",
   "scripts": {
-    "start": "gulp build",
-    "webserver": "node server.js",
+    "start": "gulp",
     "test": "mocha ./server/tests/ && ./node_modules/.bin/eslint .",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./server/tests/"
   },
@@ -13,17 +16,9 @@
     "type": "git",
     "url": "git+https://github.com/caiokf/koa-react-starter.git"
   },
-  "keywords": [
-    "koa",
-    "react",
-    "starter"
-  ],
-  "author": "Caio Kinzrel Filho (caiokf@gmail.com)",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/caiokf/koa-react-starter/issues"
   },
-  "homepage": "https://github.com/caiokf/koa-react-starter#readme",
   "dependencies": {
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-transform-regenerator": "^6.22.0",
@@ -32,7 +27,6 @@
     "babel-preset-es2017": "^6.22.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-3": "^6.22.0",
-    "css-modulesify": "^0.27.1",
     "koa": "^2.2.0",
     "koa-bodyparser": "^2.2.0",
     "koa-generic-session": "^1.11.3",
@@ -48,6 +42,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
+    "css-modulesify": "^0.27.1",
     "eslint": "^3.7.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
