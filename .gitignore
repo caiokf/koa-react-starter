@@ -12,3 +12,5 @@ node_modules
 tmp
 /public/assets/js/bundle.js
 .DS_Store
+.gulp-cache
+dist/
