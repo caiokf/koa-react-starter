@@ -1,19 +1,14 @@
-import koa from 'koa';
+import Koa from 'koa';
 import serve from 'koa-static';
-import session from 'koa-generic-session';
-import bodyParser from 'koa-bodyparser';
 import views from 'koa-views';
 
 import config from '../config.js';
 
-const app = new koa();
+const app = new Koa();
 exports.app = app;
 
 app.proxy = true;
-app.keys = [config.site.secret];
 
-app.use(session());
-app.use(bodyParser());
 app.use(serve('./public'));
 app.use(views('./public', { extension: 'pug' }));
 
