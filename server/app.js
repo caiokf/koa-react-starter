@@ -2,8 +2,8 @@ import Koa from 'koa';
 import serve from 'koa-static';
 import views from 'koa-views';
 
-import config from './config.js';
-import routes from './routes.js';
+import config from './config';
+import routes from './routes';
 
 const port = process.env.PORT || config.site.port;
 const app = new Koa();

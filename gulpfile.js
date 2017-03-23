@@ -9,6 +9,7 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const livereload = require('gulp-livereload');
 const mocha = require('gulp-mocha');
+const eslint = require('gulp-eslint');
 const fs = require('fs');
 
 const paths = {
@@ -28,7 +29,6 @@ const paths = {
     './server/**/*.spec.js',
     './client/**/*.spec.js',
   ]
-
 };
 
 const babelConfig = {
@@ -83,6 +83,17 @@ gulp.task('specs', () => {
       require: './specs/require.js',
       colors: true
     }));
+});
+
+
+gulp.task('eslint', () => {
+  return gulp
+    .src(paths.serverSourceFiles)
+    .pipe(eslint({
+      configFile: './.eslintrc.js'
+    }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('serve', ['watch:client', 'watch:server']);

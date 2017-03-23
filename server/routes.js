@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 
-import api from './controllers/api.controller.js';
+import api from './controllers/api.controller';
 
 export default function routes(app) {
   const router = new Router();
@@ -9,14 +9,14 @@ export default function routes(app) {
     try {
       await next();
     } catch (err) {
-      ctx.body = { message: err.message }
-      ctx.status = err.status || 500
+      ctx.body = { message: err.message };
+      ctx.status = err.status || 500;
     }
   });
 
   api.configure(router);
 
-  router.get('/', async (ctx, next) => {
+  router.get('/', async (ctx) => {
     await ctx.render('index');
   });
 
