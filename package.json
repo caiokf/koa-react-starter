@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A great way to start your app with koa and react!",
   "main": "server.js",
-  "keywords": [ "koa", "react", "starter" ],
+  "keywords": [
+    "koa",
+    "react",
+    "starter"
+  ],
   "author": "Caio Kinzrel Filho (caiokf@gmail.com)",
   "license": "ISC",
   "homepage": "https://github.com/caiokf/koa-react-starter#readme",

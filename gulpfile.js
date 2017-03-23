@@ -33,7 +33,7 @@ const babelConfig = {
 gulp.task('compile:server', () => {
   return gulp
     .src(paths.serverSourceFiles)
-    .pipe(babel({ presets: ['es2015', 'react'], "plugins": ["transform-async-to-generator"] }))
+    .pipe(babel())
     .pipe(gulp.dest(paths.serverBuildDir))
 });
 
@@ -48,7 +48,7 @@ gulp.task('watch:server', ['compile:server'] , () => {
 
 gulp.task('compile:client', () => {
   browserify(paths.clientEntrypoint)
-    .transform('babelify', { presets: ['es2015', 'react'], "plugins": ["transform-async-to-generator"] })
+    .transform('babelify')
     .plugin('css-modulesify', {
         o: paths.clientBundleDir + '/bundle.css',
         use: [
