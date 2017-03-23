@@ -8,6 +8,7 @@ const cssmodulesify = require('css-modulesify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const livereload = require('gulp-livereload');
+const mocha = require('gulp-mocha');
 const fs = require('fs');
 
 const paths = {
@@ -20,10 +21,13 @@ const paths = {
 
   serverBuildDir: './dist',
   serverSourceFiles : [
-    './server.js',
-    './config.js',
     './server/**/*.js'
+  ],
+
+  specSourceFiles: [
+    './server/**/*.spec.js'
   ]
+
 };
 
 const babelConfig = {
@@ -67,6 +71,17 @@ gulp.task('compile:client', () => {
 gulp.task('watch:client', ['compile:client'] , () => {
   livereload.listen();
   gulp.watch(paths.clientSourceFiles , ['compile:client']);
+});
+
+gulp.task('specs', () => {
+  process.env.PORT = 8001;
+  return gulp
+    .src(paths.specSourceFiles)
+    .pipe(mocha({
+      reporter: 'nyan',
+      require: './specs/require.js',
+      colors: true
+    }));
 });
 
 gulp.task('serve', ['watch:client', 'watch:server']);
