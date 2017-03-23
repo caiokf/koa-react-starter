@@ -1,5 +1,7 @@
 import Router from 'koa-router';
 
+import api from './controllers/api.controller.js';
+
 export default function routes(app) {
   const router = new Router();
 
@@ -12,9 +14,7 @@ export default function routes(app) {
     }
   });
 
-  router.get('/api', (ctx, next) => {
-    ctx.body = 'result';
-  });
+  api.configure(router);
 
   router.get('/', async (ctx, next) => {
     await ctx.render('index');
