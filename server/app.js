@@ -3,20 +3,21 @@ import serve from 'koa-static';
 import views from 'koa-views';
 
 import config from '../config.js';
+import routes from './routes.js';
 
+const port = config.site.port;
 const app = new Koa();
-exports.app = app;
 
 app.proxy = true;
-
 app.use(serve('./public'));
 app.use(views('./public', { extension: 'pug' }));
 
-require('./routes');
+app.use(routes(app));
 
-console.log(`${config.site.name} is now listening on port ${config.site.port}`);
-app.listen(config.site.port);
+app.listen(port, () => {
+  console.log(`:: now listening on port ${port}`);
+});
 
-process.on('SIGINT', function exit() {
+process.on('SIGINT', () => {
   process.exit();
 });
