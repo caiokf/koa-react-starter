@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+
 import Footer from "../components/footer";
 import Navigation from "../components/navigation"
 
@@ -11,16 +11,10 @@ const MainLayout = React.createClass({
         <main>
           {this.props.children}
         </main>
-        <Footer
-          footerText={ footerConfig.footerText }
-        />
+        <Footer footerText="This site was built with react!" />
       </div>
     );
   }
 });
-
-const footerConfig = {
-  footerText: "This site was built with react!"
-}
 
 export default MainLayout;
