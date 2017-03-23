@@ -4,7 +4,7 @@ const notify = require('gulp-notify');
 const babelify = require('babelify');
 const babel = require('gulp-babel');
 const browserify = require('browserify');
-const cssmodulesify = require('css-modulesify');
+const sassify = require('sassify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const livereload = require('gulp-livereload');
@@ -17,7 +17,8 @@ const paths = {
   clientBundleDir: './public/dist',
   clientSourceFiles: [
     './client/**/*.js',
-    './client/**/*.scss'
+    './client/**/*.scss',
+    './client/**/*.sass',
   ],
 
   serverBuildDir: './dist',
@@ -54,13 +55,10 @@ gulp.task('watch:server', ['compile:server'] , () => {
 gulp.task('compile:client', () => {
   browserify(paths.clientEntrypoint)
     .transform('babelify')
-    .plugin('css-modulesify', {
-        o: paths.clientBundleDir + '/bundle.css',
-        use: [
-          'postcss-modules-local-by-default',
-          'postcss-modules-extract-imports',
-          'postcss-modules-scope'
-        ]
+    .transform(sassify, {
+      'auto-inject': true, // Inject css directly in the code
+      base64Encode: false, // Use base64 to inject css
+      sourceMap: false // Add source map to the code
     })
     .bundle()
     .pipe(source('bundle.js'))
