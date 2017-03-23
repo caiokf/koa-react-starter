@@ -24,10 +24,6 @@ const babelConfig = {
   presets: ['es2017', 'react', 'stage-3']
 };
 
-const swallowError = (error) => {
-  console.log(error.message);
-}
-
 gulp.task('compile', () => {
   return gulp
     .src(paths.app)
@@ -37,9 +33,8 @@ gulp.task('compile', () => {
 
 gulp.task('babel', () => {
   browserify(paths.inputReact)
-    .transform('babelify', babelConfig)
+    .transform('babelify', { presets: ['es2015', 'react'], "plugins": ["transform-async-to-generator"] })
     .bundle()
-    .on('error', swallowError)
     .pipe(fs.createWriteStream(`${paths.outputReact}/bundle.js`));
 });
 

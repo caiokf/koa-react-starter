@@ -1,20 +1,27 @@
-const config = require('./config.js');
-const app = require('./app.js').app;
-const views = require('co-views');
-const Router = require('koa-router');
-const serve = require('koa-static');
-const render = views('public', { map: { html: 'swig' } });
+import views from 'koa-views';
+import Router from 'koa-router';
+import serve from 'koa-static';
 
-const main = require('./controllers/main');
+import config from './config.js';
+import { app } from './app.js';
 
-const routes = new Router();
+const router = new Router();
 
-app.use(serve('./public'));
-
-routes.get('/index', main.index);
-
-routes.get('*', function* all() {
-  this.body = yield render('index');
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    ctx.body = { message: err.message }
+    ctx.status = err.status || 500
+  }
 });
 
-app.use(routes.routes());
+router.get('/api', (ctx, next) => {
+  ctx.body = 'result';
+});
+
+router.get('/', async (ctx, next) => {
+  await ctx.render('index');
+});
+
+app.use(router.routes());

@@ -15,18 +15,7 @@ app.keys = [config.site.secret];
 app.use(session());
 app.use(bodyParser());
 app.use(serve('./public'));
-app.use(views('./public'), {
-  extension: 'pug',
-});
-
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    ctx.body = { message: err.message }
-    ctx.status = err.status || 500
-  }
-});
+app.use(views('./public', { extension: 'pug' }));
 
 require('./routes');
 
