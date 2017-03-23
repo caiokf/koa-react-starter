@@ -15,7 +15,7 @@ app.use(serve('./public'));
 routes.get('/index', main.index);
 
 routes.get('*', function* all() {
-	this.body = yield render('index');
+  this.body = yield render('index');
 });
 
 app.use(routes.routes());

@@ -30,13 +30,13 @@ app.use(serve("./public"));
 
 // error handling
 app.use(function* error(next) {
-	try {
-		yield next;
-	} catch (err) {
-		this.status = err.status || 500;
-		this.body = err.message;
-		this.app.emit("error", err, this);
-	}
+  try {
+    yield next;
+  } catch (err) {
+    this.status = err.status || 500;
+    this.body = err.message;
+    this.app.emit("error", err, this);
+  }
 });
 
 // routes are handled in a separate file
@@ -47,5 +47,5 @@ console.log(`${config.site.name} is now listening on port ${config.site.port}`);
 app.listen(config.site.port);
 
 process.on("SIGINT", function exit() {
-	process.exit();
+  process.exit();
 });
