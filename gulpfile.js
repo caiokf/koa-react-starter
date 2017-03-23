@@ -7,6 +7,7 @@ const browserify = require('browserify');
 const cssmodulesify = require('css-modulesify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const livereload = require('gulp-livereload');
 const Cache = require('gulp-file-cache');
 const fs = require('fs');
 
@@ -53,10 +54,12 @@ gulp.task('compile:client', () => {
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
-    .pipe(gulp.dest(paths.clientBundleDir));
+    .pipe(gulp.dest(paths.clientBundleDir))
+    .pipe(livereload());
 });
 
 gulp.task('watch:client', ['compile:client'] , () => {
+  livereload.listen();
   gulp.watch(paths.clientSourceFiles , ['compile:client']);
 });
 
